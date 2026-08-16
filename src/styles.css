@@ -1,0 +1,282 @@
+@import "tailwindcss" source("../");
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap");
+
+:root {
+  --sov-bg: #111215;
+  --sov-panel: #18191e;
+  --sov-cyan: #00d2ff;
+  --sov-gold-1: #f39c12;
+  --sov-gold-2: #f1c40f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply m-0;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", sans-serif;
+  background-color: #111215;
+  color: #e7e9ee;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/* Gold text gradient for dollar figures */
+.sov-gold {
+  background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Cyan glow for status tags & borders */
+.sov-cyan-glow {
+  color: #00d2ff;
+  text-shadow: 0 0 10px rgba(0, 210, 255, 0.55);
+}
+
+.sov-cyan-border {
+  border: 1px solid rgba(0, 210, 255, 0.45);
+  box-shadow: 0 0 18px rgba(0, 210, 255, 0.18), inset 0 0 12px rgba(0, 210, 255, 0.05);
+}
+
+/* Glassmorphism panel */
+.sov-glass {
+  background: linear-gradient(180deg, rgba(24, 25, 30, 0.85) 0%, rgba(18, 19, 22, 0.9) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Pulsing status dot */
+@keyframes sov-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.82); }
+}
+.sov-pulse {
+  animation: sov-pulse 1.6s ease-in-out infinite;
+}
+
+/* Orange awaiting badge glow */
+.sov-awaiting {
+  color: #ff9f43;
+  background: rgba(255, 159, 67, 0.10);
+  border: 1px solid rgba(255, 159, 67, 0.55);
+  box-shadow: 0 0 14px rgba(255, 159, 67, 0.35);
+}
+
+/* Bright green settled badge */
+.sov-settled {
+  color: #28e07a;
+  background: rgba(40, 224, 122, 0.10);
+  border: 1px solid rgba(40, 224, 122, 0.6);
+  box-shadow: 0 0 14px rgba(40, 224, 122, 0.35);
+}
+
+/* Lime verified holder tag */
+.sov-verified {
+  color: #a3ff5a;
+  background: rgba(163, 255, 90, 0.10);
+  border: 1px solid rgba(163, 255, 90, 0.6);
+  box-shadow: 0 0 12px rgba(163, 255, 90, 0.35);
+}
+
+/* Neon green admin settle button */
+.sov-admin-btn {
+  color: #0a0d0a;
+  background: linear-gradient(135deg, #28e07a 0%, #a3ff5a 100%);
+  border: 1px solid rgba(163, 255, 90, 0.7);
+  box-shadow: 0 0 18px rgba(40, 224, 122, 0.45);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.sov-admin-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 24px rgba(40, 224, 122, 0.6);
+}
+
+/* Primary cyan button */
+.sov-cyan-btn {
+  color: #04141a;
+  background: linear-gradient(135deg, #00d2ff 0%, #66e7ff 100%);
+  border: 1px solid rgba(0, 210, 255, 0.7);
+  box-shadow: 0 0 18px rgba(0, 210, 255, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.sov-cyan-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 26px rgba(0, 210, 255, 0.55);
+}
+
+/* Gold button for high-value CTAs */
+.sov-gold-btn {
+  color: #2a1c00;
+  background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
+  border: 1px solid rgba(241, 196, 15, 0.7);
+  box-shadow: 0 0 18px rgba(241, 196, 15, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.sov-gold-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 26px rgba(241, 196, 15, 0.55);
+}
+
+/* Nav hover shift */
+.sov-nav-link {
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+.sov-nav-link:hover {
+  transform: translateX(4px);
+  color: #00d2ff;
+}
+
+/* Row slide-in animation for new queue entries */
+@keyframes sov-row-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.sov-row-in {
+  animation: sov-row-in 0.35s ease-out;
+}
+
+/* Subtle headline glow */
+.sov-headline {
+  text-shadow: 0 0 22px rgba(0, 210, 255, 0.18);
+}
+
+/* ── Escrow modal ── */
+.sov-escrow-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(5, 7, 10, 0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.sov-escrow-panel {
+  background: #18191E;
+  border: 1.5px solid rgba(0, 210, 255, 0.85);
+  box-shadow:
+    0 0 0 1px rgba(0, 210, 255, 0.25),
+    0 0 38px rgba(0, 210, 255, 0.45),
+    inset 0 0 24px rgba(0, 210, 255, 0.08);
+  border-radius: 18px;
+  max-width: 560px;
+  width: 100%;
+  animation: sov-escrow-in 0.28s ease-out;
+}
+
+@keyframes sov-escrow-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* SVG countdown bar depletes from right to left via stroke-dashoffset */
+.sov-countdown-track {
+  stroke: rgba(255, 255, 255, 0.08);
+}
+.sov-countdown-fill {
+  stroke: #00D2FF;
+  filter: drop-shadow(0 0 6px rgba(0, 210, 255, 0.85));
+  transition: stroke-dashoffset 1s linear;
+}
+
+/* ── Public market trends chart ── */
+.sov-chart-panel {
+  position: relative;
+}
+.sov-chart-canvas-wrap {
+  position: relative;
+  height: 320px;
+}
+
+/* ── Anomaly / anti-cheat badge ── */
+.sov-anomaly {
+  color: #ff5470;
+  background: rgba(255, 84, 112, 0.10);
+  border: 1px solid rgba(255, 84, 112, 0.6);
+  box-shadow: 0 0 14px rgba(255, 84, 112, 0.4);
+}
+
+.sov-flagged-row {
+  background: rgba(255, 84, 112, 0.06);
+}
+
+/* ── Listed-on-AH status badge ── */
+.sov-listed {
+  color: #00D2FF;
+  background: rgba(0, 210, 255, 0.10);
+  border: 1px solid rgba(0, 210, 255, 0.6);
+  box-shadow: 0 0 14px rgba(0, 210, 255, 0.35);
+}
+
+/* ── Circuit breaker cooling-down banner ── */
+.sov-cooldown {
+  color: #ff9f43;
+  background: rgba(255, 159, 67, 0.10);
+  border: 1px solid rgba(255, 159, 67, 0.55);
+  box-shadow: 0 0 14px rgba(255, 159, 67, 0.35);
+}
+
+/* ── New York session status ── */
+.sov-market-open {
+  background: rgba(40, 224, 122, 0.08);
+  border-color: rgba(40, 224, 122, 0.55);
+  box-shadow: 0 0 18px rgba(40, 224, 122, 0.12);
+}
+.sov-market-closed {
+  background: rgba(255, 159, 67, 0.08);
+  border-color: rgba(255, 159, 67, 0.55);
+  box-shadow: 0 0 18px rgba(255, 159, 67, 0.1);
+}
+
+/* ── Range slider for the simulator ── */
+.sov-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(0,210,255,0.6), rgba(0,210,255,0.15));
+  outline: none;
+}
+.sov-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #00D2FF;
+  border: 2px solid #04141a;
+  box-shadow: 0 0 12px rgba(0, 210, 255, 0.7);
+  cursor: pointer;
+}
+.sov-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #00D2FF;
+  border: 2px solid #04141a;
+  box-shadow: 0 0 12px rgba(0, 210, 255, 0.7);
+  cursor: pointer;
+}
+
+/* Copy-paste broadcast ticket block */
+.sov-broadcast {
+  background: #0a0c10;
+  border: 1px dashed rgba(0, 210, 255, 0.35);
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
